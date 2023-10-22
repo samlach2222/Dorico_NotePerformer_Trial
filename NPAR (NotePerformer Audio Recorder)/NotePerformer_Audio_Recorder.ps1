@@ -4,6 +4,9 @@
 # Description: Audio Recorder for NotePerfomer using PS Core and FFmpeg. 
 # It will record the audio output of your computer and save it to a MP3 file. It will also adjust the gain of the audio file to make it listenable.
 
+# PARAMS :
+param($bypassStart = $false)
+
 # FUNCTIONS : 
 function MeasureAudioGain {
     param (
@@ -50,7 +53,7 @@ function InstallFfmpeg {
 
 # MAIN :
 # Load PSCore.dll and create a new instance of the LoopbackRecorder class
-Add-Type -Path PSCore.dll
+Add-Type -Path "PSCore.dll" # TODO : ERROR IN POWERSHELL.EXE BUT NOT IN PWSH.EXE
 $Recording = [PSCore.LoopbackRecorder]
 
 # Open explorer select file
@@ -82,19 +85,28 @@ Write-Host "FFmpeg path: $ffmpegLocation"
 $OutputFile = $saveFileDialog.FileName
 Write-Host "Output file: $OutputFile"
 
-Write-Host "---------------------------------"
-Write-Host "| Note Performer Audio Recorder |"
-Write-Host "|--------------------------------"
-Write-Host "|                               |"
-Write-Host "| Press 's' to start recording  |"
-Write-Host "| Press 'e' to stop recording   |"
-Write-Host "|                               |"
-Write-Host "---------------------------------"
-Write-Host ""
+    Write-Host "---------------------------------"
+    Write-Host "| Note Performer Audio Recorder |"
+    Write-Host "|--------------------------------"
+    Write-Host "|                               |"
+if ($bypassStart) {
+    Write-Host "| Press 'e' to stop recording   |"
+} else {
+    Write-Host "| Press 's' to start recording  |"
+    Write-Host "| Press 'e' to stop recording   |"
+}
+    Write-Host "|                               |"
+    Write-Host "---------------------------------"
+    Write-Host ""
 
 $recordingFlag = $false
 
-# Set timer
+if ($bypassStart) {
+    $recordingFlag = $true
+    $timer = [System.Diagnostics.Stopwatch]::StartNew()
+    Write-Host "Recording started"
+    $Recording::StartRecording($OutputFile, 320000)
+}
 
 while ($true) {
     if ([System.Console]::KeyAvailable) {
@@ -144,3 +156,4 @@ If ($gain -ne $null -and $gain -ne 0) {
 } else {
     Write-Host "No sound detected, no gain adjustment and no file"
 }
+Pause
