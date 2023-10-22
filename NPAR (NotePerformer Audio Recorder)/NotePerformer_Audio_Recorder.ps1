@@ -9,10 +9,8 @@ function MeasureAudioGain {
     param (
         [string]$OutputFile
     )
-
-    $ffmpeg = "$PSScriptRoot\ffmpeg\ffmpeg.exe"
     $OutputFile = $OutputFile -replace "'", "''"
-    $command = "& '$ffmpeg' -i '$OutputFile' -af 'volumedetect' -f null /dev/null 2>&1"
+    $command = "& '$ffmpegLocation' -i '$OutputFile' -af 'volumedetect' -f null /dev/null 2>&1"
     $output = Invoke-Expression -Command $command
     # Extract the gain value from the FFmpeg output.
     $gain = $output | Select-String 'max_volume: ([\d.-]+) dB' | ForEach-Object { $_.Matches[0].Groups[1].Value }
@@ -72,7 +70,14 @@ if ($result -ne 'OK') {
 
 # Verify if ffmpeg is installed
 InstallFfmpeg
-$ffmpeg = "$PSScriptRoot\ffmpeg\ffmpeg.exe"
+# Check if ffmpeg is located in /ffmpeg
+$ffmpegLocation = Get-Command "$PSScriptRoot\ffmpeg\ffmpeg.exe" -ErrorAction SilentlyContinue
+If ($ffmpegLocation -eq $null) {
+    $ffmpegLocation = "ffmpeg"
+} else {
+    $ffmpegLocation = "$PSScriptRoot\ffmpeg\ffmpeg.exe"
+}
+Write-Host "FFmpeg path: $ffmpegLocation"
 
 $OutputFile = $saveFileDialog.FileName
 Write-Host "Output file: $OutputFile"
@@ -89,11 +94,14 @@ Write-Host ""
 
 $recordingFlag = $false
 
+# Set timer
+
 while ($true) {
     if ([System.Console]::KeyAvailable) {
         $key = [System.Console]::ReadKey($true).KeyChar
 
         if ($key -eq 's' -and -not $recordingFlag) {
+            $timer = [System.Diagnostics.Stopwatch]::StartNew()
             Write-Host "Recording started"
             $Recording::StartRecording($OutputFile, 320000)
             $recordingFlag = $true
@@ -103,6 +111,10 @@ while ($true) {
             Write-Host "Recording stopped"
             break
         }
+    }
+    # Display the recording time in the same line each time
+    if ($recordingFlag) {
+        Write-Host -NoNewline "`r" $timer.Elapsed.ToString("hh\:mm\:ss\.fff")
     }
 }
 
@@ -115,7 +127,7 @@ If ($gain -ne $null -and $gain -ne 0) {
     $OutputFile = $OutputFile -replace "'", "''"
     $gain = 0 - $gain
     $tempFile = $OutputFile -replace ".mp3", "_temp.mp3"
-    $command = "& '$ffmpeg' -nostats -loglevel 0 -i '$OutputFile' -af 'volume=$gain dB' -y '$tempFile'"
+    $command = "& '$ffmpegLocation' -nostats -loglevel 0 -i '$OutputFile' -af 'volume=$gain dB' -y '$tempFile'"
     $output = Invoke-Expression -Command $command
 
     # Delete the original file and rename the temp file.
