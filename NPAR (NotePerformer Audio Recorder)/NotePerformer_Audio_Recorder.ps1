@@ -53,7 +53,8 @@ function InstallFfmpeg {
 
 # MAIN :
 # Load PSCore.dll and create a new instance of the LoopbackRecorder class
-Add-Type -Path "PSCore.dll" # TODO : ERROR IN POWERSHELL.EXE BUT NOT IN PWSH.EXE
+Unblock-File "PSCore.dll"
+Add-Type -Path "PSCore.dll"
 $Recording = [PSCore.LoopbackRecorder]
 
 # Open explorer select file
