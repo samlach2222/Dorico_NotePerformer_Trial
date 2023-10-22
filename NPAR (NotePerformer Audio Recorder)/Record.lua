@@ -30,8 +30,9 @@ end
 ---------------------------------------
 -- FOR NPA (NotePerformer Assistant) --
 ---------------------------------------
- local scriptPath = "./NotePerformer_Audio_Recorder.ps1"
- local command = "start powershell.exe -ExecutionPolicy Bypass -Command " .. scriptPath .. "true"
+local scriptPath = "& ./NotePerformer_Audio_Recorder.ps1"
+local luaPath = debug.getinfo(1).source:match("@?(.*/)")
+local command = "start powershell.exe -ExecutionPolicy Bypass -Command \"cd '" .. luaPath .. "' ; " .. scriptPath .. " true\""
 --execute command but don't wait for it to finish
 os.execute(command)
 
@@ -39,6 +40,12 @@ os.execute(command)
 -- FOR DORICO --
 ----------------
 if ffmpegOK then
+    -- Create pipe who wait for NPAR to connect (finish initialisation)
+    local scriptCommand = "(New-Object IO.Pipes.NamedPipeServerStream('npar', 'Out')).WaitForConnection()"
+    local command = "powershell.exe -Command \"cd '" .. luaPath .. "' ; " .. scriptCommand .. "\""
+    --execute command but don't wait for it to finish
+    os.execute(command)
+
     local app=DoApp.DoApp()
     -- Impossible for the moment to get duration of the flow or to get play button state
     app:doCommand([[Play.SetPlayheadToFlowStart]])

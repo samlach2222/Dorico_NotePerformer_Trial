@@ -102,6 +102,9 @@ if ($bypassStart) {
 $recordingFlag = $false
 
 if ($bypassStart) {
+    $pipe = New-Object IO.Pipes.NamedPipeClientStream('.', 'npar', 'In')
+    $pipe.Connect()
+
     $recordingFlag = $true
     $timer = [System.Diagnostics.Stopwatch]::StartNew()
     Write-Host "Recording started"
