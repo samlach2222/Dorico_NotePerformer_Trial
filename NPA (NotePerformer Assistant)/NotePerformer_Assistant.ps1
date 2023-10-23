@@ -17,8 +17,8 @@ if(-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdenti
 # | Env Variables and Functions | #
 # ------------------------------- #
 $url = "https://www.noteperformer.com/DownloadNotePerformerTrial5.php?platform=PC"
-$npInstallPath = "PATH_TO_NOTE_PERFORMER_INSTALL_FOLDER\NotePerformer" # /!\ CHANGE THIS WITH YOUR INSTALL FOLDER /!\
-$doricoInstallPath = "PATH_TO_DORICO_INSTALL_FOLDER\Dorico5.exe" # /!\ CHANGE THIS WITH YOUR INSTALL FOLDER -> Can be Dorico5.exe too /!\
+$npInstallPath = "PATH_TO_NOTE_PERFORMER_INSTALL_FOLDER\NotePerformer" # /!\ CHANGE THIS WITH YOUR NP INSTALL FOLDER /!\
+$doricoInstallPath = "PATH_TO_DORICO_INSTALL_FOLDER\Dorico5.exe" # /!\ CHANGE THIS WITH YOUR DORICO INSTALL FOLDER /!\
 
 # ---------------------------- #
 # | Function to Reinstall NP | #
