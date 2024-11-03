@@ -1,6 +1,6 @@
 # Authors : Samlach2222, Mahtwo
 # Description : Install NotePerformer trials each time the trials are out
-# Version : 1.4
+# Version : 1.5
 # Date : 2024-10-26
 # Usage : Run the script with PowerShell 7
 # Requirements :
@@ -111,13 +111,27 @@ function LaunchDoricoWithNPPE() {
     $processName = "Dorico5"
 
     # Start a background job to monitor the Dorico process
-    $job = Start-Job -ScriptBlock {
+    $ref_buttonLaunchDoricoWithNPPE = Get-Variable ButtonLaunchDoricoWithNPPE
+    $ref_buttonLaunchDorico = Get-Variable ButtonLaunchDorico
+    Start-ThreadJob {
         param($processName)
 
+        # set variable with 59 minutes in seconds
+        $timeOut = 3540
+
+
         # Continuously check if the process is running
-        while (Get-Process -Name $processName -ErrorAction SilentlyContinue) {
+        while (Get-Process -Name $processName -ErrorAction SilentlyContinue || $timeOut -gt 0) {
+            # display time remaining in minutes and seconds
+            $minutes = [math]::Floor($timeOut / 60)
+            $seconds = $timeOut % 60
+            $timeLeft = "Trial time left: ${minutes}:${seconds}"
+            ($using:ref_buttonLaunchDoricoWithNPPE).Value.Text = $timeLeft
+            $timeOut -= 1
             Start-Sleep -Seconds 1 # Check every second
         }
+
+        # TODO : Check timeOut and save current file, display a message box if timeOut is 0
 
         # Once the process stops, close VSTAudioEngine5
         $vstProcessName = "VSTAudioEngine5"
@@ -133,18 +147,12 @@ function LaunchDoricoWithNPPE() {
             Stop-Process -Name $npeProcessName -ErrorAction SilentlyContinue
         }
 
-    } -ArgumentList $processName
+        ($using:ref_buttonLaunchDoricoWithNPPE).Value.Text = "Launch Dorico + NPPE"
+        ($using:ref_buttonLaunchDorico).Value.Enabled = $true
+        ($using:ref_buttonLaunchDoricoWithNPPE).Value.Enabled = $true
 
-    # Check job status periodically
-    Register-ObjectEvent -InputObject $job -EventName StateChanged -Action {
-        if ($job.State -eq "Completed") {
-            # Update GUI once the job is complete
-            $ButtonLaunchDoricoWithNPPE.Text = "Launch Dorico + NPPE"
-            $ButtonLaunchDorico.Enabled = $true
-            $ButtonLaunchDoricoWithNPPE.Enabled = $true
-            Unregister-Event -SourceIdentifier ProcessCheckEvent
-        }
-    } -SourceIdentifier ProcessCheckEvent
+
+    } -ArgumentList $processName
 }
 
 # ----------------------------- #
@@ -158,13 +166,26 @@ function LaunchDorico() {
     $processName = "Dorico5"
 
     # Start a background job to monitor the Dorico process
-    $job = Start-Job -ScriptBlock {
+    $ref_buttonLaunchDoricoWithNPPE = Get-Variable ButtonLaunchDoricoWithNPPE
+    $ref_buttonLaunchDorico = Get-Variable ButtonLaunchDorico
+    Start-ThreadJob {
         param($processName)
 
+        # set variable with 59 minutes in seconds
+        $timeOut = 3540
+
         # Continuously check if the process is running
-        while (Get-Process -Name $processName -ErrorAction SilentlyContinue) {
+        while (Get-Process -Name $processName -ErrorAction SilentlyContinue || $timeOut -gt 0) {
+            # display time remaining in minutes and seconds
+            $minutes = [math]::Floor($timeOut / 60)
+            $seconds = $timeOut % 60
+            $timeLeft = "Trial time left: ${minutes}:${seconds}"
+            ($using:ref_buttonLaunchDorico).Value.Text = $timeLeft
+            $timeOut -= 1
             Start-Sleep -Seconds 1 # Check every second
         }
+
+        # TODO : Check timeOut and save current file, display a message box if timeOut is 0
 
         # Once the process stops, close VSTAudioEngine5
         $vstProcessName = "VSTAudioEngine5"
@@ -172,18 +193,12 @@ function LaunchDorico() {
         if ($vstProcess) {
             Stop-Process -Name $vstProcessName -ErrorAction SilentlyContinue
         }
-    } -ArgumentList $processName
 
-    # Check job status periodically
-    Register-ObjectEvent -InputObject $job -EventName StateChanged -Action {
-        if ($job.State -eq "Completed") {
-            # Update GUI once the job is complete
-            $ButtonLaunchDorico.Text = "Launch Dorico"
-            $ButtonLaunchDorico.Enabled = $true
-            $ButtonLaunchDoricoWithNPPE.Enabled = $true
-            Unregister-Event -SourceIdentifier ProcessCheckEvent
-        }
-    } -SourceIdentifier ProcessCheckEvent
+        ($using:ref_buttonLaunchDorico).Value.Text = "Launch Dorico"
+        ($using:ref_buttonLaunchDorico).Value.Enabled = $true
+        ($using:ref_buttonLaunchDoricoWithNPPE).Value.Enabled = $true
+
+    } -ArgumentList $processName
 }
 
 # ------------------------------------ #
