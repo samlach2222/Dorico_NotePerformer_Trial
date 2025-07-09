@@ -5,8 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Styling;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
+using NotePerformerAssistant.Resources;
 
 namespace NotePerformerAssistant
 {
@@ -107,7 +106,7 @@ namespace NotePerformerAssistant
                     {
                         errorHint.IsVisible = true;
                         errorHint.Foreground = Brushes.Red;
-                        errorHint.Text = "Vous devez saisir un executable !";
+                        errorHint.Text = Strings.Configuration_SelectExe;
                     }
                 }
             }

@@ -1,5 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NotePerformerAssistant.Localization"
              x:Class="NotePerformerAssistant.Configuration">
     <Grid ColumnDefinitions="Auto,*" Margin="20">
         <Grid Grid.Column="0" Width="600">
@@ -13,7 +14,7 @@
             </Border>
             <Grid RowDefinitions="Auto,*,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="*,*" Margin="35">
-                    <TextBlock Grid.Column="0" Text="Note Performer Assistant"
+                    <TextBlock Grid.Column="0" Text="{local:Loc Configuration.Title}"
                                FontSize="16" FontWeight="Bold" Foreground="rgba(255,255,255,0.9)"
                                VerticalAlignment="Center" />
                 </Grid>

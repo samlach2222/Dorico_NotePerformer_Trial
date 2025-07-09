@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.VisualTree;
 using NotePerformerAssistant.Model;
+using NotePerformerAssistant.Resources;
 
 namespace NotePerformerAssistant
 {
@@ -47,11 +48,11 @@ namespace NotePerformerAssistant
             if (window?.StorageProvider is not { } provider) return;
             var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
-                Title = "Choisir un fichier .exe",
+                Title = Strings.Configuration_ChooseExeFile,
                 AllowMultiple = false,
                 FileTypeFilter =
                 [
-                    new FilePickerFileType("Fichiers EXE") { Patterns = ["*.exe"] }
+                    new FilePickerFileType(Strings.Configuration_ExeFile) { Patterns = ["*.exe"] }
                 ]
             });
 

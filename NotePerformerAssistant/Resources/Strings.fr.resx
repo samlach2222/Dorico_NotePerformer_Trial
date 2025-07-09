@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Configuration.SelectExe" xml:space="preserve">
+        <value>Vous devez saisir un executable !</value>
+    </data>
+    <data name="Configuration.Title" xml:space="preserve">
+        <value>Note Performer Assistant</value>
+    </data>
+    <data name="Configuration.ExeFile" xml:space="preserve">
+        <value>Fichiers EXE</value>
+    </data>
+    <data name="Configuration.ChooseExeFile" xml:space="preserve">
+        <value>Choisir un fichier .exe</value>
+    </data>
+    <data name="Configuration.Dorico" xml:space="preserve">
+        <value>Dorico</value>
+    </data>
+    <data name="Configuration.Sibelius" xml:space="preserve">
+        <value>Sibelius</value>
+    </data>
+    <data name="Configuration.Finale" xml:space="preserve">
+        <value>Finale</value>
+    </data>
+    <data name="Configuration.ExePath" xml:space="preserve">
+        <value>Chemin du fichier .exe...</value>
+    </data>
+    <data name="Configuration.MusicSoftware" xml:space="preserve">
+        <value>Choix du logiciel de notation musicale</value>
+    </data>
+    <data name="Configuration.NotePerformerInstall" xml:space="preserve">
+        <value>NotePerformer sera automatiquement installé
+dans un sous-dossier</value>
+    </data>
+    <data name="Configuration.ThemeChoice" xml:space="preserve">
+        <value>Choix du thème de l'application</value>
+    </data>
+    <data name="Configuration.DarkTheme" xml:space="preserve">
+        <value>Sombre</value>
+    </data>
+    <data name="Configuration.LightTheme" xml:space="preserve">
+        <value>Clair</value>
+    </data>
+    <data name="Configuration.SystemTheme" xml:space="preserve">
+        <value>Système</value>
+    </data>
+    <data name="Configuration.WelcomeTitle" xml:space="preserve">
+        <value>Bienvenue sur
+Note Performer Assistant</value>
+    </data>
+    <data name="Configuration.WelcomeSubtitle" xml:space="preserve">
+        <value>Cet écran de configuration a pour but d'initialiser votre espace de travail et vos préférences.</value>
+    </data>
+</root>
