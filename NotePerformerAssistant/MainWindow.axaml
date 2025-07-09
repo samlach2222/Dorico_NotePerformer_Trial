@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:notePerformerAssistant="clr-namespace:NotePerformerAssistant"
+        mc:Ignorable="d"
+        x:Class="NotePerformerAssistant.MainWindow"
+        SystemDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Title="NotePerformerAssistant"
+        Width="1140" Height="720"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="False"
+        Background="{DynamicResource ThemeBackgroundBrush}"
+        CanResize="False">
+
+    <ContentControl x:Name="MainContent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" />
+</Window>

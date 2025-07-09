@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:notePerformerAssistant="clr-namespace:NotePerformerAssistant"
+             x:Class="NotePerformerAssistant.Theme">
+    <Grid Margin="50 0 50 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Choix du thème de l'appliaction"
+                   HorizontalAlignment="Center" FontSize="24" FontWeight="ExtraBold" TextAlignment="Center"
+                   Foreground="{DynamicResource TextBrush}" Margin="0 0 0 10"/>
+
+        <ComboBox Grid.Row="1" x:Name="ThemeSelector"
+                  Width="150"
+                  HorizontalAlignment="Center"
+                  Margin="10"
+                  SelectedIndex="2">
+            <ComboBoxItem Content="Clair"/>
+            <ComboBoxItem Content="Sombre"/>
+            <ComboBoxItem Content="Système"/>
+        </ComboBox>
+
+        <notePerformerAssistant:ActionButton Grid.Row="2" x:Name="NextButton" />
+    </Grid>
+</UserControl>

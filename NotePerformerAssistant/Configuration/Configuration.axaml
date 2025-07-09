@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="NotePerformerAssistant.Configuration">
+    <Grid ColumnDefinitions="Auto,*" Margin="20">
+        <Grid Grid.Column="0" Width="600">
+            <Border>
+                <Border.Clip>
+                    <PathGeometry>
+                        M0 25C0 11.1929 11.1929 0 25 0H570.822C586.157 0 597.878 13.6792 595.527 28.8328L497.784 658.833C495.894 671.014 485.407 680 473.08 680H25C11.1929 680 0 668.807 0 655V25Z
+                    </PathGeometry>
+                </Border.Clip>
+                <Image Source="../Assets/background.jpeg" Stretch="UniformToFill" Margin="-100 0 0 0" />
+            </Border>
+            <Grid RowDefinitions="Auto,*,Auto">
+                <Grid Grid.Row="0" ColumnDefinitions="*,*" Margin="35">
+                    <TextBlock Grid.Column="0" Text="Note Performer Assistant"
+                               FontSize="16" FontWeight="Bold" Foreground="rgba(255,255,255,0.9)"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <ContentControl Grid.Column="1" x:Name="ContentArea"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Width="400" Height="300">
+        </ContentControl>
+    </Grid>
+</UserControl>

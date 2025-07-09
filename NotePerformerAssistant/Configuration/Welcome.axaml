@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:notePerformerAssistant="clr-namespace:NotePerformerAssistant"
+             x:Class="NotePerformerAssistant.Welcome">
+    <Grid Margin="50 0 50 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Bienvenue sur&#x0a;Note Performer Assistant"
+                   HorizontalAlignment="Center" FontSize="24" FontWeight="ExtraBold" TextAlignment="Center"
+                   Foreground="{DynamicResource TextBrush}" Margin="0 0 0 10"/>
+
+        <TextBlock Grid.Row="1" TextWrapping="Wrap"
+                   Text="Cet écran de configuration a pour but d'initialiser votre espace de travail et vos préférences"
+                   HorizontalAlignment="Center" TextAlignment="Center"
+                   FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" Margin="0,20,0,0" />
+        <notePerformerAssistant:ActionButton Grid.Row="2" x:Name="NextButton" />
+    </Grid>
+</UserControl>
